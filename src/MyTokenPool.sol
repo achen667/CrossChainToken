@@ -28,7 +28,6 @@ contract MyTokenPool is TokenPool {
 
         IMyToken(address(i_token)).burn(address(this), lockOrBurnIn.amount);
 
-        // encode a function call to pass the caller's info to the destination pool and update it
         lockOrBurnOut = Pool.LockOrBurnOutV1({
             destTokenAddress: getRemoteToken(lockOrBurnIn.remoteChainSelector),
             destPoolData: ""
@@ -41,8 +40,6 @@ contract MyTokenPool is TokenPool {
         _validateReleaseOrMint(releaseOrMintIn);
         address receiver = releaseOrMintIn.receiver;
 
-        // Mint rebasing tokens to the receiver on the destination chain
-        // This will also mint any interest that has accrued since the last time the user's balance was updated.
         IMyToken(address(i_token)).mint(receiver, releaseOrMintIn.amount);
 
         return

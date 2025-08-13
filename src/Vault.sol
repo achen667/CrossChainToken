@@ -15,7 +15,6 @@ contract Vault {
         i_myToken = _myToken;
     }
 
-    // allows the contract to receive rewards
     receive() external payable {}
 
     function deposit() external payable {
@@ -23,14 +22,9 @@ contract Vault {
         emit Deposit(msg.sender, msg.value);
     }
 
-    /**
-     * @dev redeems rebase token for the underlying asset
-     * @param _amount the amount being redeemed
-     *
-     */
     function redeem(uint256 _amount) external {
         i_myToken.burn(msg.sender, _amount);
-        // executes redeem of the underlying asset
+
         (bool success, ) = payable(msg.sender).call{value: _amount}("");
         if (!success) {
             revert Vault__RedeemFailed();

@@ -20,6 +20,7 @@ SEPOLIA_RNM_PROXY_ADDRESS="0xba3f6251de62dED61Ff98590cB2fDf6871FbB991"
 SEPOLIA_CHAIN_SELECTOR="16015286601757825753"
 SEPOLIA_LINK_ADDRESS="0x779877A7B0D9E8603169DdbD7836e478b4624789"
 
+
 # Compile and deploy the  Token contract
 foundryup-zksync
 source .env
@@ -105,8 +106,8 @@ echo "Sepolia balance after bridging: $SEPOLIA_BALANCE_AFTER"
 
 
 echo "------------------- Summary ------------------"
-echo "ZKsync  token address: $ZKSYNC_TOKEN_ADDRESS"
-echo "Pool address: $ZKSYNC_POOL_ADDRESS"
+echo "ZKsync token address: $ZKSYNC_TOKEN_ADDRESS"
+echo "ZKsync Pool address: $ZKSYNC_POOL_ADDRESS"
 echo "Sepolia  token address: $SEPOLIA_TOKEN_ADDRESS"
 echo "Sepolia pool address: $SEPOLIA_POOL_ADDRESS"
-echo "Vault address: $VAULT_ADDRESS"
+echo "Sepolia Vault address: $VAULT_ADDRESS"

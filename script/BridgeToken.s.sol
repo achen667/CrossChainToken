@@ -28,18 +28,22 @@ contract BridgeTokensScript is Script {
             token: tokenToSendAddress,
             amount: amountToSend
         });
-        vm.startBroadcast();
+
         Client.EVM2AnyMessage memory message = Client.EVM2AnyMessage({
             receiver: abi.encode(receiverAddress),
             data: "",
             tokenAmounts: tokenAmounts,
             feeToken: linkTokenAddress,
-            extraArgs: Client._argsToBytes(Client.EVMExtraArgsV1({gasLimit: 0}))
+            extraArgs: Client._argsToBytes(
+                Client.EVMExtraArgsV1({gasLimit: 3000000})
+            )
         });
         uint256 ccipFee = IRouterClient(routerAddress).getFee(
             destinationChainSelector,
             message
         );
+
+        vm.startBroadcast();
         IERC20(linkTokenAddress).approve(routerAddress, ccipFee);
         IERC20(tokenToSendAddress).approve(routerAddress, amountToSend);
         IRouterClient(routerAddress).ccipSend(
